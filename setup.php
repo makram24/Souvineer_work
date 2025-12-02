@@ -8,7 +8,7 @@
 require_once 'config.php';
 
 // Generate correct password hash for 'admin123'
-$password = 'admin123';
+$password = 'Tncap979a97';
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
 echo "<!DOCTYPE html>";

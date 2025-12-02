@@ -1,9 +1,9 @@
 <?php
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'work_management');
+define('DB_USER', 'bytebeir_work');
+define('DB_PASS', 'Qnw1846abF48@');
+define('DB_NAME', 'bytebeir_work_management');
 
 // File upload configuration
 define('UPLOAD_DIR', __DIR__ . '/uploads/');
@@ -35,11 +35,16 @@ function getDBConnection() {
         try {
             $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+                error_log("Database connection failed: " . $conn->connect_error);
+                return false;
             }
             $conn->set_charset("utf8mb4");
         } catch (Exception $e) {
-            die("Database connection error: " . $e->getMessage());
+            error_log("Database connection error: " . $e->getMessage());
+            return false;
+        } catch (Error $e) {
+            error_log("Database connection error: " . $e->getMessage());
+            return false;
         }
     }
     return $conn;
@@ -48,9 +53,14 @@ function getDBConnection() {
 // Start session
 function startSession() {
     if (session_status() === PHP_SESSION_NONE) {
-        session_name(SESSION_NAME);
-        session_set_cookie_params(SESSION_LIFETIME);
-        session_start();
+        // Only set session name and params if headers haven't been sent
+        if (!headers_sent()) {
+            session_name(SESSION_NAME);
+            session_set_cookie_params(SESSION_LIFETIME);
+        }
+        if (!session_start()) {
+            error_log("Session start failed");
+        }
     }
 }
 
@@ -77,5 +87,5 @@ function sanitizeInput($data) {
 function formatDate($date) {
     return date('F j, Y', strtotime($date));
 }
-?>
+// No closing PHP tag to prevent whitespace issues
 

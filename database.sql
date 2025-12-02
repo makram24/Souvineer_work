@@ -1,7 +1,7 @@
 -- Database schema for daily work management system
-CREATE DATABASE IF NOT EXISTS work_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS bytebeir_work_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE work_management;
+USE bytebeir_work_management;
 
 -- Users table for authentication
 CREATE TABLE IF NOT EXISTS users (

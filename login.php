@@ -1,10 +1,23 @@
 <?php
+// Enable error reporting for debugging (remove in production)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Start output buffering to prevent any output before headers
+if (!ob_get_level()) {
+    ob_start();
+}
+
 require_once 'config.php';
+
+// Start session BEFORE any output
 startSession();
 
 // Redirect if already logged in
 if (isAuthenticated()) {
-    header('Location: index.php');
+    ob_end_clean();
+    $redirect_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/index.php';
+    header('Location: ' . $redirect_url);
     exit;
 }
 
@@ -17,7 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($username) && !empty($password)) {
         try {
             $conn = getDBConnection();
+            if (!$conn) {
+                throw new Exception('Database connection failed');
+            }
+            
             $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
+            if (!$stmt) {
+                throw new Exception('Prepare failed: ' . $conn->error);
+            }
+            
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
@@ -27,7 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
-                    header('Location: index.php');
+                    $stmt->close();
+                    ob_end_clean();
+                    // Use absolute URL for redirect
+                    $redirect_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/index.php';
+                    header('Location: ' . $redirect_url);
                     exit;
                 } else {
                     $error = 'Invalid username or password. If this is your first time, please run setup.php to configure the admin account.';
@@ -37,11 +62,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             $stmt->close();
         } catch (Exception $e) {
-            $error = 'Database error. Please check your database connection.';
+            $error = 'Database error: ' . $e->getMessage();
+        } catch (Error $e) {
+            $error = 'Error: ' . $e->getMessage();
         }
     } else {
         $error = 'Please fill in all fields';
     }
+}
+
+// Clean output buffer before HTML (only if we have output buffering active)
+if (ob_get_level() > 0) {
+    ob_end_clean();
 }
 ?>
 <!DOCTYPE html>
