@@ -45,9 +45,7 @@ CREATE TABLE IF NOT EXISTS entry_videos (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Insert default admin user (username: admin, password: admin123)
--- Change this password after first login!
-INSERT INTO users (username, password) VALUES 
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi')
-ON DUPLICATE KEY UPDATE username=username;
--- Default password hash is for 'admin123' - CHANGE THIS!
+-- IMPORTANT: Run setup.php after importing this SQL file to set the correct password hash
+-- Or manually insert with: INSERT INTO users (username, password) VALUES ('admin', '$2y$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy');
+-- The hash above is for 'admin123' - CHANGE THIS PASSWORD AFTER FIRST LOGIN!
 

@@ -19,10 +19,18 @@ A PHP-based management system for tracking daily work entries including videos, 
 1. **Database Setup**:
    - Open phpMyAdmin
    - Import the `database.sql` file to create the database and tables
-   - The default admin credentials are:
+   
+2. **Admin Account Setup**:
+   - After importing the database, navigate to `setup.php` in your browser
+   - This will create/update the admin user with the correct password hash
+   - Default admin credentials:
      - Username: `admin`
      - Password: `admin123`
-     - **IMPORTANT**: Change this password immediately after first login!
+     - **IMPORTANT**: 
+       - Delete `setup.php` after setup for security!
+       - Change the password immediately after first login!
+   
+   **Alternative**: If you can't access setup.php, you can manually reset the password using `reset_password.php`
 
 2. **Configuration**:
    - Edit `config.php` if your database credentials differ from the defaults

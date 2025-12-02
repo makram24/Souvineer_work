@@ -15,26 +15,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if (!empty($username) && !empty($password)) {
-        $conn = getDBConnection();
-        $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows === 1) {
-            $user = $result->fetch_assoc();
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                header('Location: index.php');
-                exit;
+        try {
+            $conn = getDBConnection();
+            $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result->num_rows === 1) {
+                $user = $result->fetch_assoc();
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['username'] = $user['username'];
+                    header('Location: index.php');
+                    exit;
+                } else {
+                    $error = 'Invalid username or password. If this is your first time, please run setup.php to configure the admin account.';
+                }
             } else {
-                $error = 'Invalid username or password';
+                $error = 'Invalid username or password. If this is your first time, please run setup.php to configure the admin account.';
             }
-        } else {
-            $error = 'Invalid username or password';
+            $stmt->close();
+        } catch (Exception $e) {
+            $error = 'Database error. Please check your database connection.';
         }
-        $stmt->close();
     } else {
         $error = 'Please fill in all fields';
     }
@@ -56,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Login</h2>
             <?php if ($error): ?>
                 <div class="error-message"><?php echo $error; ?></div>
+            <?php endif; ?>
+            <?php if (!file_exists('setup.php') || (file_exists('setup.php') && filesize('setup.php') > 0)): ?>
+                <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 12px;">
+                    <strong>First time setup?</strong> Make sure you've imported database.sql and run <a href="setup.php" style="color: #856404; text-decoration: underline;">setup.php</a> to configure the admin account.
+                </div>
             <?php endif; ?>
             <form method="POST" action="">
                 <div class="form-group">
