@@ -53,31 +53,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Reset Password - Work Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="login-page">
     <div class="login-container">
         <div class="login-box">
-            <h1>Reset Admin Password</h1>
-            <h2>⚠️ Security Tool</h2>
+            <h1>🔐 Reset Admin Password</h1>
+            <h2>Security Tool</h2>
             <?php if ($message): ?>
                 <div class="message <?php echo $messageType; ?>"><?php echo $message; ?></div>
             <?php endif; ?>
             <form method="POST" action="">
                 <div class="form-group">
                     <label for="new_password">New Password</label>
-                    <input type="password" id="new_password" name="new_password" required minlength="6">
+                    <input type="password" id="new_password" name="new_password" required minlength="6" placeholder="Enter new password">
                 </div>
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+                    <input type="password" id="confirm_password" name="confirm_password" required minlength="6" placeholder="Confirm new password">
                 </div>
-                <button type="submit" class="btn btn-primary">Reset Password</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Reset Password</button>
             </form>
-            <p style="margin-top: 20px; text-align: center;">
-                <a href="login.php">Back to Login</a>
+            <p style="margin-top: 24px; text-align: center;">
+                <a href="login.php" style="color: var(--primary); text-decoration: none; font-weight: 500;">← Back to Login</a>
             </p>
-            <p style="margin-top: 10px; font-size: 12px; color: #dc3545; text-align: center;">
+            <p style="margin-top: 16px; font-size: 13px; color: var(--danger); text-align: center; padding: 12px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border-left: 4px solid var(--danger);">
                 ⚠️ Delete this file after use!
             </p>
         </div>

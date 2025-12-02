@@ -74,16 +74,19 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Work Management - Daily Entry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Daily Work Management</h1>
+            <h1>📅 Daily Work Management</h1>
             <div class="user-info">
-                <span>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <a href="view.php" class="btn btn-secondary">View Entries</a>
-                <a href="logout.php" class="btn btn-danger">Logout</a>
+                <span>👤 <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                <a href="view.php" class="btn btn-secondary">📊 View Entries</a>
+                <a href="logout.php" class="btn btn-danger">🚪 Logout</a>
             </div>
         </header>
 
@@ -93,41 +96,41 @@ $stmt->close();
 
         <main>
             <div class="entry-form-container">
-                <h2>Add/Edit Daily Entry</h2>
+                <h2>✏️ Add/Edit Daily Entry</h2>
                 <form method="POST" enctype="multipart/form-data" id="entryForm">
                     <div class="form-group">
-                        <label for="entry_date">Date</label>
+                        <label for="entry_date">📅 Date</label>
                         <input type="date" id="entry_date" name="entry_date" value="<?php echo date('Y-m-d'); ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="worked_hours">Worked Hours</label>
-                        <input type="number" id="worked_hours" name="worked_hours" step="0.25" min="0" max="24" value="0" required>
+                        <label for="worked_hours">⏰ Worked Hours</label>
+                        <input type="number" id="worked_hours" name="worked_hours" step="0.25" min="0" max="24" value="0" required placeholder="0.00">
                     </div>
 
                     <div class="form-group">
-                        <label for="notes">Notes</label>
+                        <label for="notes">📝 Notes</label>
                         <textarea id="notes" name="notes" rows="5" placeholder="Enter your notes here..."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="images">Upload Images</label>
+                        <label for="images">🖼️ Upload Images</label>
                         <input type="file" id="images" name="images[]" accept="image/*" multiple>
                         <small>You can select multiple images (JPEG, PNG, GIF, WebP)</small>
                     </div>
 
                     <div class="form-group">
-                        <label for="videos">Upload Videos</label>
+                        <label for="videos">🎥 Upload Videos</label>
                         <input type="file" id="videos" name="videos[]" accept="video/*" multiple>
                         <small>You can select multiple videos (MP4, WebM, OGG, QuickTime)</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Entry</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">💾 Save Entry</button>
                 </form>
             </div>
 
             <div class="calendar-container">
-                <h2>Entry Calendar</h2>
+                <h2>📆 Entry Calendar</h2>
                 <div class="calendar" id="calendar">
                     <!-- Calendar will be populated by JavaScript -->
                 </div>

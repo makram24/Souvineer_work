@@ -61,23 +61,26 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>View Entry - <?php echo formatDate($selected_date); ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>View Daily Entry</h1>
+            <h1>👁️ View Daily Entry</h1>
             <div class="user-info">
-                <a href="index.php" class="btn btn-secondary">Back to Entry</a>
-                <a href="logout.php" class="btn btn-danger">Logout</a>
+                <a href="index.php" class="btn btn-secondary">⬅️ Back to Entry</a>
+                <a href="logout.php" class="btn btn-danger">🚪 Logout</a>
             </div>
         </header>
 
         <main>
             <div class="date-selector">
-                <label for="date_picker">Select Date:</label>
+                <label for="date_picker">📅 Select Date:</label>
                 <input type="date" id="date_picker" value="<?php echo $selected_date; ?>">
-                <button onclick="goToDate()" class="btn btn-primary">Go</button>
+                <button onclick="goToDate()" class="btn btn-primary">🔍 Go</button>
             </div>
 
             <?php if ($entry): ?>
@@ -88,13 +91,13 @@ $stmt->close();
 
                     <div class="entry-info">
                         <div class="info-item">
-                            <strong>Worked Hours:</strong>
+                            <strong>⏰ Worked Hours:</strong>
                             <span><?php echo number_format($entry['worked_hours'], 2); ?> hours</span>
                         </div>
 
                         <?php if (!empty($entry['notes'])): ?>
                             <div class="info-item">
-                                <strong>Notes:</strong>
+                                <strong>📝 Notes:</strong>
                                 <div class="notes-content"><?php echo nl2br(htmlspecialchars($entry['notes'])); ?></div>
                             </div>
                         <?php endif; ?>
@@ -102,7 +105,7 @@ $stmt->close();
 
                     <?php if (!empty($images)): ?>
                         <div class="media-section">
-                            <h3>Images (<?php echo count($images); ?>)</h3>
+                            <h3>🖼️ Images (<?php echo count($images); ?>)</h3>
                             <div class="image-gallery">
                                 <?php foreach ($images as $image): ?>
                                     <div class="image-item">
@@ -119,7 +122,7 @@ $stmt->close();
 
                     <?php if (!empty($videos)): ?>
                         <div class="media-section">
-                            <h3>Videos (<?php echo count($videos); ?>)</h3>
+                            <h3>🎥 Videos (<?php echo count($videos); ?>)</h3>
                             <div class="video-gallery">
                                 <?php foreach ($videos as $video): ?>
                                     <div class="video-item">
@@ -149,7 +152,7 @@ $stmt->close();
             <?php endif; ?>
 
             <div class="date-navigation">
-                <h3>Available Dates</h3>
+                <h3>📅 Available Dates</h3>
                 <div class="date-list">
                     <?php foreach ($all_dates as $date): ?>
                         <a href="?date=<?php echo $date; ?>" 
