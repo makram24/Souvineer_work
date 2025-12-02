@@ -1,0 +1,13 @@
+# Security: Allow access to uploaded files (images and videos)
+# Files are stored with unique names for security
+# Consider adding additional authentication if needed
+
+# Prevent directory listing
+Options -Indexes
+
+# Set PHP upload limits (if allowed)
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
+php_value max_execution_time 300
+php_value max_input_time 300
+

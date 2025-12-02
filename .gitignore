@@ -1,0 +1,22 @@
+# Upload directories
+uploads/
+uploads/images/
+uploads/videos/
+
+# Configuration overrides (if you create a local config)
+config.local.php
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
