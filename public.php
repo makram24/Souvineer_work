@@ -313,20 +313,23 @@ $stmt->close();
         
         @media (max-width: 768px) {
             .public-container {
-                padding: 16px;
+                padding: 12px;
+                max-width: 100%;
+                overflow-x: hidden;
             }
             
             .public-header {
-                padding: 24px 20px;
+                padding: 20px 16px;
             }
             
             .public-header h1 {
-                font-size: 28px;
+                font-size: 24px;
             }
             
             .month-filter {
                 flex-direction: column;
                 align-items: stretch;
+                padding: 16px;
             }
             
             .month-filter select {
@@ -335,27 +338,123 @@ $stmt->close();
             
             .stats-container {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 24px;
+            }
+            
+            .public-calendar {
+                padding: 16px 8px;
+                overflow-x: hidden;
+            }
+            
+            .public-calendar h2 {
+                font-size: 20px;
+                margin-bottom: 16px;
+                padding: 0 8px;
             }
             
             .calendar-grid {
-                gap: 4px;
+                gap: 3px;
+                padding: 0 4px;
             }
             
-            .calendar-day-public {
-                padding: 12px 4px;
-                min-height: 60px;
-            }
-            
-            .calendar-day-public .day-number {
-                font-size: 14px;
-            }
-            
-            .calendar-day-public .day-hours {
+            .calendar-header {
+                padding: 8px 4px;
                 font-size: 10px;
             }
             
+            .calendar-day-public {
+                padding: 8px 2px;
+                min-height: 45px;
+                border-width: 1px;
+            }
+            
+            .calendar-day-public .day-number {
+                font-size: 12px;
+                margin-bottom: 2px;
+            }
+            
+            .calendar-day-public .day-hours {
+                font-size: 9px;
+                margin-top: 2px;
+            }
+            
             .day-details {
-                padding: 24px 20px;
+                padding: 20px 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .public-container {
+                padding: 8px;
+            }
+            
+            .public-header {
+                padding: 16px 12px;
+            }
+            
+            .public-header h1 {
+                font-size: 20px;
+            }
+            
+            .public-header p {
+                font-size: 14px;
+            }
+            
+            .month-filter {
+                padding: 12px;
+            }
+            
+            .public-calendar {
+                padding: 12px 4px;
+            }
+            
+            .public-calendar h2 {
+                font-size: 18px;
+                padding: 0 4px;
+            }
+            
+            .calendar-grid {
+                gap: 2px;
+                padding: 0 2px;
+            }
+            
+            .calendar-header {
+                padding: 6px 2px;
+                font-size: 9px;
+            }
+            
+            .calendar-day-public {
+                padding: 6px 1px;
+                min-height: 40px;
+            }
+            
+            .calendar-day-public .day-number {
+                font-size: 11px;
+            }
+            
+            .calendar-day-public .day-hours {
+                font-size: 8px;
+            }
+            
+            .stat-card {
+                padding: 12px;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 20px;
+            }
+            
+            .stat-card .stat-label {
+                font-size: 12px;
             }
         }
     </style>
